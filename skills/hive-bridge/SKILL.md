@@ -11,6 +11,8 @@ Use this skill when the user asks you to install Hive Bridge, connect a local ag
 
 Install the `hive-bridge` CLI, complete browser-based login, verify the user-scoped Local Agent Channel connection, and start the outbound WebSocket runner.
 
+Login creates a long-lived binding. Do not ask the user to log in again just because the computer slept, restarted, or the runner disconnected; restart the runner instead.
+
 ## Install The CLI
 
 Run:
@@ -47,6 +49,8 @@ hive-bridge run --transport websocket
 ```
 
 This runner uses outbound HTTPS/WebSocket connections only. Do not expose a local port, reverse proxy, tunnel, or public callback server.
+
+The foreground runner reconnects after transient WebSocket failures. Treat online/offline as runtime presence only; it is separate from the long-lived login binding.
 
 ## Upload A Local File To Hive
 

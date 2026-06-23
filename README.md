@@ -28,3 +28,5 @@ hive-bridge run --transport websocket
 ```
 
 The npm package is the executable bridge. This GitHub repository is the agent skill package.
+
+`hive-bridge login` creates a long-lived binding. `hive-bridge run --transport websocket` is the online runner and reconnects after transient WebSocket failures.
