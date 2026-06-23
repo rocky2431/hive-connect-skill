@@ -32,7 +32,7 @@ Run:
 hive-bridge login
 ```
 
-Open the activation URL, let the user log in to Hive, and ask the user to approve the Local Agent Link on the Hive Local Agent page.
+Open the activation URL and let the user log in to Hive. The Hive page should automatically approve the local agent authentication from the `user_code` in the URL; do not ask the user to copy a code into Hive manually.
 
 Then verify:
 
