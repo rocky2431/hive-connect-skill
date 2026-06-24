@@ -1,0 +1,63 @@
+---
+name: hive-connect
+description: Install Hive Connect, connect this local agent to the user's Hive Local Agent Channel, and keep a cloud-to-local WebSocket runner online for chat, file transfer, and delegated work.
+---
+
+# Hive Connect
+
+Use this skill when the user asks you to install Hive Connect, connect a local agent to Hive, or keep a local agent online for Hive cloud chat and delegated work.
+
+## Goal
+
+Install the `hive-connect` CLI, complete browser-based login, verify the user-scoped Local Agent Channel connection, and start the outbound WebSocket runner.
+
+Login creates a long-lived binding. Do not ask the user to log in again just because the computer slept, restarted, or the runner disconnected; restart the runner instead.
+
+## Install The CLI
+
+Run:
+
+```bash
+npm install -g @hiveclaw243/hive-connect
+hive-connect status
+```
+
+If `hive-connect status` says it is not logged in, continue to login.
+
+## Login
+
+Run the exact login command copied from Hive. It includes the Hive URL, so do not ask the user to type one manually:
+
+```bash
+hive-connect login --hive-url <Hive URL copied from Hive>
+```
+
+The browser opens Hive. Let the user log in there. Hive should automatically approve the local agent authentication from the `user_code` in the URL; do not ask the user to copy a code into Hive manually.
+
+Then verify:
+
+```bash
+hive-connect status
+```
+
+## Keep The Local Agent Online
+
+For cloud-to-local chat, file transfer, and delegated work, run:
+
+```bash
+hive-connect run
+```
+
+This runner uses outbound HTTPS/WebSocket connections only. Do not expose a local port, reverse proxy, tunnel, or public callback server.
+
+The foreground runner keeps one WebSocket session open for consecutive cloud messages and reconnects after transient WebSocket failures. The runner streams progress back to Hive before the final result. Treat online/offline as runtime presence only; it is separate from the long-lived login binding.
+
+## Upload A Local File To Hive
+
+If the installed CLI exposes an upload command, run:
+
+```bash
+hive-connect upload <path>
+```
+
+If upload is not available, use the Hive Local Agent page's Workspace upload control and report the uploaded workspace path back to the user.
