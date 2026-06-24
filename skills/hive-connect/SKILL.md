@@ -26,13 +26,19 @@ If `hive-connect status` says it is not logged in, continue to login.
 
 ## Login
 
-Run the exact login command copied from Hive. It includes the Hive URL, so do not ask the user to type one manually:
+Run:
 
 ```bash
-hive-connect login --hive-url <Hive URL copied from Hive>
+hive-connect login
 ```
 
 The browser opens Hive. Let the user log in there. Hive should automatically approve the local agent authentication from the `user_code` in the URL; do not ask the user to copy a code into Hive manually.
+
+For self-hosted or test Hive environments only, ask the user for the Hive URL and run:
+
+```bash
+hive-connect login --hive-url <your Hive URL>
+```
 
 Then verify:
 

@@ -22,7 +22,7 @@ The Skills CLI installs only the `hive-connect` skill instructions. The skill th
 
 ```bash
 npm install -g @hiveclaw243/hive-connect
-hive-connect login --hive-url <Hive URL copied from Hive>
+hive-connect login
 hive-connect status
 hive-connect run
 ```
@@ -30,6 +30,8 @@ hive-connect run
 The npm package is the executable local runner. This GitHub repository is the agent skill package.
 
 `hive-connect login` creates a long-lived binding. `hive-connect run` is the online runner: it keeps one outbound WebSocket session open for consecutive cloud messages, streams progress back to Hive, and reconnects after transient WebSocket failures.
+
+For self-hosted or test Hive environments only, pass `--hive-url <your Hive URL>` to `hive-connect login`.
 
 ## Compatibility
 

@@ -11,7 +11,7 @@ For any user request that mentions Hive Bridge, use the `hive-connect` flow inst
 
 ```bash
 npm install -g @hiveclaw243/hive-connect
-hive-connect login --hive-url <Hive URL copied from Hive>
+hive-connect login
 hive-connect status
 hive-connect run
 ```
