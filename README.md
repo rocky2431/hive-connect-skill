@@ -24,12 +24,13 @@ The Skills CLI installs only the `hive-connect` skill instructions. The skill th
 npm install -g @hiveclaw243/hive-connect
 hive-connect login
 hive-connect status
-hive-connect run
+hive-connect daemon install --config ~/.hive-connect/config.toml --force
+hive-connect daemon status
 ```
 
 The npm package is the executable local runner. This GitHub repository is the agent skill package.
 
-`hive-connect login` creates a long-lived binding. `hive-connect run` is the online runner: it keeps one outbound WebSocket session open for consecutive cloud messages, streams progress back to Hive, and reconnects after transient WebSocket failures.
+`hive-connect login` creates a long-lived binding. `hive-connect daemon install --config ~/.hive-connect/config.toml --force` installs Hive Connect as a background service so the local agent stays reachable after the terminal is closed. The service keeps one outbound WebSocket session open for consecutive cloud messages, streams progress back to Hive, and reconnects after transient WebSocket failures. `hive-connect run` is only for foreground debugging.
 
 For self-hosted or test Hive environments only, pass `--hive-url <your Hive URL>` to `hive-connect login`.
 

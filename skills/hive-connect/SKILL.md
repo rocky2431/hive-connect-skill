@@ -1,6 +1,6 @@
 ---
 name: hive-connect
-description: Install Hive Connect, connect this local agent to the user's Hive Local Agent Channel, and keep a cloud-to-local WebSocket runner online for chat, file transfer, and delegated work.
+description: Install Hive Connect, connect this local agent to the user's Hive Local Agent Channel, and keep a cloud-to-local background service online for chat, file transfer, and delegated work.
 ---
 
 # Hive Connect
@@ -9,9 +9,9 @@ Use this skill when the user asks you to install Hive Connect, connect a local a
 
 ## Goal
 
-Install the `hive-connect` CLI, complete browser-based login, verify the user-scoped Local Agent Channel connection, and start the outbound WebSocket runner.
+Install the `hive-connect` CLI, complete browser-based login, verify the user-scoped Local Agent Channel connection, and install/start the outbound background service.
 
-Login creates a long-lived binding. Do not ask the user to log in again just because the computer slept, restarted, or the runner disconnected; restart the runner instead.
+Login creates a long-lived binding. Do not ask the user to log in again just because the computer slept, restarted, or the service disconnected; restart the background service instead.
 
 ## Install The CLI
 
@@ -48,15 +48,22 @@ hive-connect status
 
 ## Keep The Local Agent Online
 
-For cloud-to-local chat, file transfer, and delegated work, run:
+For cloud-to-local chat, file transfer, and delegated work, install and start the background service:
+
+```bash
+hive-connect daemon install --config ~/.hive-connect/config.toml --force
+hive-connect daemon status
+```
+
+This service uses outbound HTTPS/WebSocket connections only. Do not expose a local port, reverse proxy, tunnel, or public callback server.
+
+The background service keeps Hive reachable after the terminal is closed and reconnects after transient WebSocket failures. It streams progress back to Hive before the final result. Treat online/offline as runtime presence only; it is separate from the long-lived login binding.
+
+For foreground debugging only, run:
 
 ```bash
 hive-connect run
 ```
-
-This runner uses outbound HTTPS/WebSocket connections only. Do not expose a local port, reverse proxy, tunnel, or public callback server.
-
-The foreground runner keeps one WebSocket session open for consecutive cloud messages and reconnects after transient WebSocket failures. The runner streams progress back to Hive before the final result. Treat online/offline as runtime presence only; it is separate from the long-lived login binding.
 
 ## Upload A Local File To Hive
 

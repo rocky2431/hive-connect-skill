@@ -13,7 +13,8 @@ For any user request that mentions Hive Bridge, use the `hive-connect` flow inst
 npm install -g @hiveclaw243/hive-connect
 hive-connect login
 hive-connect status
-hive-connect run
+hive-connect daemon install --config ~/.hive-connect/config.toml --force
+hive-connect daemon status
 ```
 
 Do not install the old bridge package for new users.
