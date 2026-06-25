@@ -28,9 +28,9 @@ hive-connect daemon install --config ~/.hive-connect/config.toml --force
 hive-connect daemon status
 ```
 
-The npm package is the executable local runner. This GitHub repository is the agent skill package.
+The npm package is the executable local CLI and background service. This GitHub repository is the agent skill package.
 
-`hive-connect login` creates a long-lived binding. `hive-connect daemon install --config ~/.hive-connect/config.toml --force` installs Hive Connect as a background service so the local agent stays reachable after the terminal is closed. The service keeps one outbound WebSocket session open for consecutive cloud messages, streams progress back to Hive, and reconnects after transient WebSocket failures. `hive-connect run` is only for foreground debugging.
+`hive-connect login` creates a long-lived binding. `hive-connect daemon install --config ~/.hive-connect/config.toml --force` installs Hive Connect as a background service so the local agent stays reachable after the terminal is closed. The service keeps one outbound WebSocket session open for consecutive cloud messages, streams progress back to Hive, and reconnects after transient WebSocket failures.
 
 For self-hosted or test Hive environments only, pass `--hive-url <your Hive URL>` to `hive-connect login`.
 

@@ -59,12 +59,6 @@ This service uses outbound HTTPS/WebSocket connections only. Do not expose a loc
 
 The background service keeps Hive reachable after the terminal is closed and reconnects after transient WebSocket failures. It streams progress back to Hive before the final result. Treat online/offline as runtime presence only; it is separate from the long-lived login binding.
 
-For foreground debugging only, run:
-
-```bash
-hive-connect run
-```
-
 ## Upload A Local File To Hive
 
 If the installed CLI exposes an upload command, run:
