@@ -32,6 +32,8 @@ The npm package is the executable local CLI and background service. This GitHub 
 
 `hive-connect login` creates a long-lived binding. `hive-connect daemon install --config ~/.hive-connect/config.toml --force` installs Hive Connect as a background service so the local agent stays reachable after the terminal is closed. The service keeps one outbound WebSocket session open for consecutive cloud messages, streams progress back to Hive, and reconnects after transient WebSocket failures.
 
+`hive-connect status` verifies the saved login binding. `hive-connect daemon status` verifies the local background service. The Hive web UI's online/offline badge is the runtime presence signal. If the computer sleeps, restarts, or the WebSocket drops, do not log in again unless the binding was revoked; restart or reinstall the daemon so it reconnects to the same local agent.
+
 For self-hosted or test Hive environments only, pass `--hive-url <your Hive URL>` to `hive-connect login`.
 
 ## Compatibility

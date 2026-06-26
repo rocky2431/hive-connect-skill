@@ -22,7 +22,7 @@ npm install -g @hiveclaw243/hive-connect
 hive-connect status
 ```
 
-If `hive-connect status` says it is not logged in, continue to login.
+`hive-connect status` checks whether this machine has a saved Hive login binding. It does not prove the background service is currently online. If it says the machine is not logged in, continue to login.
 
 ## Login
 
@@ -57,7 +57,9 @@ hive-connect daemon status
 
 This service uses outbound HTTPS/WebSocket connections only. Do not expose a local port, reverse proxy, tunnel, or public callback server.
 
-The background service keeps Hive reachable after the terminal is closed and reconnects after transient WebSocket failures. It streams progress back to Hive before the final result. Treat online/offline as runtime presence only; it is separate from the long-lived login binding.
+The background service keeps Hive reachable after the terminal is closed and reconnects after transient WebSocket failures. It streams progress back to Hive before the final result.
+
+Use `hive-connect daemon status` to verify the local service is running. Use Hive's Local Agent online/offline badge as the cloud runtime presence signal. Treat online/offline as runtime presence only; it is separate from the long-lived login binding. If Hive shows offline while `hive-connect status` is still logged in, do not repeat login first; restart or reinstall the daemon.
 
 ## Upload A Local File To Hive
 
